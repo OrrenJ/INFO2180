@@ -8,4 +8,6 @@ This folder includes:
 * _index.css_, the stylesheet used for the project.
 * _2 images_ used in the project.
 
+Note
+----
 > All files are in one directory because ~~laziness~~ there are only a few files so arranging them in sub-directories is more work than necessary.
