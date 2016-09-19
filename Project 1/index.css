@@ -1,0 +1,14 @@
+body {
+	background: #333333;
+}
+
+.container {
+	width: 80%;
+	margin: 0 auto;
+	padding: 8px;
+	background: #ffffff;
+}
+
+h1 {
+	font-family: Helvetica, Sans-Serif, Arial;
+}
