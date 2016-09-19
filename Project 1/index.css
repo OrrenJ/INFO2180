@@ -1,13 +1,21 @@
+html {
+	height: 100%;
+}
+
 body {
-	background: #333333;
+	background: #555555;
 	font-family: Verdana, Geneva, sans-serif;
+	height: 100%;
+	margin: 0 auto;
 }
 
 .container {
 	width: 45em;
+	height: 100%;
 	margin: 0 auto;
-	padding: 8px 24px 24px 24px;
+	padding: 12px 36px 36px 36px;
 	background: #ffffff;
+	box-shadow: 1px 1px 1px 1px black;
 }
 
 .header_container {
@@ -47,6 +55,7 @@ h1 {
     transform: rotate(-3deg);
     -webkit-filter: grayscale(35%); /* Chrome, Safari, Opera */
     filter: grayscale(35%);
+    position: relative;
 }
 
 .header_container .crop {
@@ -109,7 +118,6 @@ h1 {
 }
 
 .qualification_container table ul {
-	margin: 24px 0 0 0;
 	padding: 0 0 0 16px;
 	font-size: 14px;
 }
