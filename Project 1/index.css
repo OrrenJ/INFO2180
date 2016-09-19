@@ -1,14 +1,36 @@
 body {
 	background: #333333;
+	font-family: Verdana, Geneva, sans-serif;
 }
 
 .container {
-	width: 80%;
+	width: 50em;
 	margin: 0 auto;
 	padding: 8px;
 	background: #ffffff;
 }
 
+.header_container {
+	/* to do */
+}
+
+.name_container {
+	border-bottom: 1px solid #B0B0B0;
+	margin-bottom: 12px;
+}
+
 h1 {
-	font-family: Helvetica, Sans-Serif, Arial;
+	margin-bottom: 0px;
+}
+
+.header_container .info_container p {
+	margin-bottom: 0px;
+	margin-top: 0px;
+}
+
+.header_container .info_container .description {
+	color: #777777;
+	font-family: serif;
+	font-style: italic;
+	margin-top: 12px;
 }
