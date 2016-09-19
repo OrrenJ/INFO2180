@@ -6,7 +6,7 @@ body {
 .container {
 	width: 50em;
 	margin: 0 auto;
-	padding: 8px;
+	padding: 8px 24px 24px 24px;
 	background: #ffffff;
 }
 
@@ -33,4 +33,29 @@ h1 {
 	font-family: serif;
 	font-style: italic;
 	margin-top: 12px;
+}
+
+.header_container .img_border {
+	background: #ffffff;
+	padding: 6px;
+	margin: 0 12px 0 12px;
+	box-shadow: 1px 1px 2px 2px grey;
+	display: inline;
+	float: right;
+	-ms-transform: rotate(-3deg); /* IE 9 */
+    -webkit-transform: rotate(-3deg); /* Chrome, Safari, Opera */
+    transform: rotate(-3deg);
+    -webkit-filter: grayscale(35%); /* Chrome, Safari, Opera */
+    filter: grayscale(35%);
+}
+
+.header_container .crop {
+	width: 150px;
+	height: 225px;
+	overflow: hidden;
+}
+
+.header_container .crop .profile_pic {
+	height: 300px;
+	margin: -60px 0 0 -15px;
 }
