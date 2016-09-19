@@ -4,7 +4,7 @@ body {
 }
 
 .container {
-	width: 50em;
+	width: 45em;
 	margin: 0 auto;
 	padding: 8px 24px 24px 24px;
 	background: #ffffff;
@@ -58,4 +58,33 @@ h1 {
 .header_container .crop .profile_pic {
 	height: 300px;
 	margin: -60px 0 0 -15px;
+}
+
+.qualification_container {
+	margin-top: 64px;
+}
+
+.qualification_container table {
+	width: 100%;
+}
+
+.qualification_container td {
+	vertical-align: top;
+	padding: 0 16px 0 16px;
+}
+
+.qualification_container table label {
+	font-size: 18px;
+	font-style: italic;
+	font-weight: bold;
+	float: right;
+}
+
+.qualification_container table h3 {
+	font-size: 18px;
+	margin: 0 0 8px 0;
+}
+
+.qualification_container table p {
+	margin: 0 0 4px 0;
 }
