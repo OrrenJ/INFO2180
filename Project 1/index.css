@@ -99,3 +99,17 @@ h1 {
 	font-size: 14px;
 	margin: 0 0 4px 0;
 }
+
+.qualification_container table h3 span {
+	font-size: 12px;
+	float: right;
+	color: #777777;
+	font-family: serif;
+	font-style: italic;
+}
+
+.qualification_container table ul {
+	margin: 24px 0 0 0;
+	padding: 0 0 0 16px;
+	font-size: 14px;
+}
