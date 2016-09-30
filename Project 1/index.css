@@ -17,6 +17,7 @@ body {
 	background: #ffffff;
 	box-shadow: 1px 1px 1px 1px black;
 	overflow: visible;
+	-ms-overflow-style: visible;
 }
 
 .header_container {
