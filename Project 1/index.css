@@ -17,7 +17,7 @@ body {
 	background: #ffffff;
 	box-shadow: 1px 1px 1px 1px black;
 	overflow: visible;
-	-ms-overflow-style: visible;
+	-ms-overflow-style: scrollbar;
 }
 
 .header_container {
