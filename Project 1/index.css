@@ -16,6 +16,7 @@ body {
 	padding: 12px 36px 36px 36px;
 	background: #ffffff;
 	box-shadow: 1px 1px 1px 1px black;
+	overflow: visible;
 }
 
 .header_container {
