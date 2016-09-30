@@ -52,9 +52,11 @@ h1 {
 	float: right;
 	-ms-transform: rotate(-3deg); /* IE 9 */
     -webkit-transform: rotate(-3deg); /* Chrome, Safari, Opera */
-    transform: rotate(-3deg);
+    -moz-transform: rotate(-3deg); /* Firefox */
+    transform: rotate(-3deg); /* defaut */
     -webkit-filter: grayscale(35%); /* Chrome, Safari, Opera */
-    filter: grayscale(35%);
+    -moz-filter: grayscale(35%); /* Firefox */
+    filter: grayscale(35%);	/* default */
     position: relative;
 }
 
