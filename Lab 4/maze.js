@@ -25,6 +25,16 @@ window.onload = function(){
 		};
 	};
 
+	// reset game when start block is clicked
+	startblock.onclick = function(){
+		inProgress = true;
+		for(i=0; i < boundaries.length; i++){
+			var boundary = boundaries[i];
+			// reset class name
+			boundary.className = "boundary";
+		}
+	};
+
 	// function to loop through the boundaries turning them red
 	function youLose(){
 		inProgress = false;
