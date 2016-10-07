@@ -1,8 +1,10 @@
 window.onload = function(){
 
+	var inProgress = true;
 	var startblock = document.getElementById("start");
 	// select all boundaries except example
 	var boundaries = document.querySelectorAll(".boundary:not(.example)");
+	var endBlock = document.getElementById("end");
 
 	// start game when start block is hovered
 	startblock.onmouseover = function(){
@@ -10,13 +12,22 @@ window.onload = function(){
 		for(i=0; i < boundaries.length; i++){
 			var boundary = boundaries[i];
 			boundary.onmouseover = function(){
-				youLose();
+				if(inProgress)
+					youLose();
 			};
 		}
+		// end clause
+		endBlock.onmouseover = function(){
+			if(inProgress){
+				inProgress = false;
+				alert("You win!");
+			}
+		};
 	};
 
 	// function to loop through the boundaries turning them red
 	function youLose(){
+		inProgress = false;
 		for(i=0; i < boundaries.length; i++){
 			var boundary = boundaries[i];
 			// add "youlose" class since changing class resulted in unexpected behvaiour
