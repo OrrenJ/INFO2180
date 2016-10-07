@@ -6,6 +6,7 @@ window.onload = function(){
 	var boundaries = document.querySelectorAll(".boundary:not(.example)");
 	var endBlock = document.getElementById("end");
 	var statusBlock = document.getElementById("status");
+	var maze = document.getElementById("maze");
 
 	// start game when start block is hovered
 	startblock.onmouseover = function(){
@@ -27,6 +28,11 @@ window.onload = function(){
 				statusBlock.innerHTML = "You win!";
 				inProgress = false;
 			}
+		};
+		// cheat clause
+		maze.onmouseleave = function(){
+			if(inProgress)
+				youLose();
 		};
 	};
 
