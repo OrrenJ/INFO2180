@@ -11,7 +11,7 @@ $(document).ready(function(){
 	// function to setup the board at the start of the game
 	function doInitialSetup(){
 
- 		emptysquare = [ numpieces, numpieces ];
+ 		emptysquare = [ numpieces-1, numpieces-1 ];
 
 		pieces = $("#puzzlearea div");
 		$(pieces).each(function(){
@@ -39,5 +39,8 @@ $(document).ready(function(){
 			time = 0;
 
 		$(piece).animate({ left: xpos, top: ypos }, time);
+
+		$(piece).attr("x", x);
+		$(piece).attr("y", y);
 	}
 });
