@@ -2,16 +2,31 @@
 
 var puzzlesize = 400;	// size of the board (400px)
 var numpieces = 4;		// number of pieces on the board. 4 indicates 4x4, 5 indicates 5x, etc
-var piecesize;
+var piecesize;			// size of a single piece
 var emptysquare;		// position of the empty square
 var pieces;				// variable to store array of pieces
+var movetime = 250;		// time to move one piece
+var shuffled = false;	// boolean to track if board is solved or not
 
 // "main" function
 $(document).ready(function(){
 
 	doInitialSetup();	// perform the initial board setup
 	findValidMoves();	// find valid moves
-	randomise();		// randomise the board
+
+	$("#shufflebutton").click(function(){
+		// loop to shuffle board by moving backwards from finished state
+		var start = Date.now();
+		movetime = 0;
+		for(var i=0; i<300; i++){
+			var moves = $(".movablepiece").toArray();
+			var tomove = moves[Math.floor(Math.random() * moves.length)];
+			$(tomove).click();
+		}
+		movetime = 250;
+		shuffled = true;
+		console.log(Date.now()-start);	// log time spent shuffling
+	});
 
 });
 
@@ -29,7 +44,7 @@ function doInitialSetup(){
 		var piecenumber = $(this).html();
 		var xpos = (piecenumber-1)%numpieces;				// 0-3
 		var ypos = Math.ceil(piecenumber/numpieces - 1);	// 0-3
-		positionPiece(this, xpos, ypos, false);
+		positionPiece(this, xpos, ypos, 0);
 
 		// set the background for each piece
 		$(this).addClass("puzzlepiece");
@@ -38,15 +53,9 @@ function doInitialSetup(){
 }
 
 // function to position a single piece
-function positionPiece(piece, x, y, anim){
+function positionPiece(piece, x, y, time){
 	var xpos = x * piecesize;
 	var ypos = y * piecesize;
-	var time;
-
-	if(anim)
-		time = 250;
-	else
-		time = 0;
 
 	$(piece).animate({ left: xpos, top: ypos }, time);
 
@@ -60,10 +69,7 @@ function findValidMoves(){
 	var esx = emptysquare[0];
 	var esy = emptysquare[1];
 
-	//console.log("emp\t" + esx + "\t" + esy);
-
 	$(pieces).each(function(){
-		//console.log($(this).html() + "\t" + $(this).attr("x") + "\t" + $(this).attr("y"));
 		
 		var xpos = parseInt($(this).attr("x"));
 		var ypos = parseInt($(this).attr("y"));
@@ -76,7 +82,7 @@ function findValidMoves(){
 		if(left || above || right || below){
 			$(this).addClass("movablepiece");
 			$(this).click(function(){
-				positionPiece(this, esx, esy, true);
+				positionPiece(this, esx, esy, movetime);
 				emptysquare[0] = xpos;
 				emptysquare[1] = ypos;
 				findValidMoves();
@@ -87,10 +93,4 @@ function findValidMoves(){
 		}
 	});
 
-	//console.log(" ");
-}
-
-// function to randomise the board
-function randomise(){
-	// TODO
 }
