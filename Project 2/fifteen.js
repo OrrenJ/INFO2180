@@ -56,7 +56,38 @@ function positionPiece(piece, x, y, anim){
 
 // function to find valid moves
 function findValidMoves(){
-	// TODO
+	
+	var esx = emptysquare[0];
+	var esy = emptysquare[1];
+
+	//console.log("emp\t" + esx + "\t" + esy);
+
+	$(pieces).each(function(){
+		//console.log($(this).html() + "\t" + $(this).attr("x") + "\t" + $(this).attr("y"));
+		
+		var xpos = parseInt($(this).attr("x"));
+		var ypos = parseInt($(this).attr("y"));
+
+		var left  = (xpos == esx-1 && ypos == esy);
+		var above = (xpos == esx   && ypos == esy-1);
+		var right = (xpos == esx+1 && ypos == esy);
+		var below = (xpos == esx   && ypos == esy+1);
+
+		if(left || above || right || below){
+			$(this).addClass("movablepiece");
+			$(this).click(function(){
+				positionPiece(this, esx, esy, true);
+				emptysquare[0] = xpos;
+				emptysquare[1] = ypos;
+				findValidMoves();
+			});
+		} else {
+			$(this).removeClass("movablepiece");
+			$(this).unbind("click");
+		}
+	});
+
+	//console.log(" ");
 }
 
 // function to randomise the board
