@@ -33,7 +33,7 @@ $(document).ready(function(){
 		// loop to shuffle board by moving backwards from finished state
 		start = Date.now();
 		movetime = 0;
-		for(var i=0; i<3; i++){
+		for(var i=0; i<300; i++){
 			var moves = $(".movablepiece").toArray();
 			var tomove = moves[Math.floor(Math.random() * moves.length)];
 			$(tomove).click();
