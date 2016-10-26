@@ -1,3 +1,14 @@
+/*
+
+Orren Joseph - 413001000
+
+Extra features implpemented:
+- End-of-game notification (grade this, see youWin())
+- Animations and/or transitions
+- Game time
+
+*/
+
 // GLOBAL VARIABLES
 
 var puzzlesize = 400;	// size of the board (400px)
@@ -7,10 +18,10 @@ var emptysquare;		// position of the empty square
 var pieces;				// variable to store array of pieces
 var movetime = 250;		// time to move one piece
 var shuffled = false;	// boolean to track if board is solved or not
-
-// for win 
-var bg = 0;
-var font = 0;
+var start;
+var nummoves = 0;
+var besttime = 999999;
+var leastmoves = 999999;
 
 // "main" function
 $(document).ready(function(){
@@ -20,16 +31,18 @@ $(document).ready(function(){
 
 	$("#shufflebutton").click(function(){
 		// loop to shuffle board by moving backwards from finished state
-		var start = Date.now();
+		start = Date.now();
 		movetime = 0;
-		for(var i=0; i<300; i++){
+		for(var i=0; i<3; i++){
 			var moves = $(".movablepiece").toArray();
 			var tomove = moves[Math.floor(Math.random() * moves.length)];
 			$(tomove).click();
 		}
 		movetime = 250;
 		shuffled = true;
-		console.log(Date.now()-start);	// log time spent shuffling
+		nummoves = 0;
+		var shuffletime = Date.now() - start;
+		console.log("Shuffle: " + shuffletime + "ms");	// log time spent shuffling
 	});
 
 });
@@ -86,6 +99,9 @@ function findValidMoves(){
 		if(left || above || right || below){
 			$(this).addClass("movablepiece");
 			$(this).click(function(){
+				// ignore duplicate clicks
+				$(this).unbind("click");
+				nummoves++;
 				positionPiece(this, esx, esy, movetime);
 				emptysquare[0] = xpos;
 				emptysquare[1] = ypos;
@@ -125,15 +141,34 @@ function checkIfWon(){
 		youWin();
 }
 
+// function to convert milliseconds to minutes and seconds
+function msToMinSec(ms){
+	var min = Math.floor(ms/1000/60);
+	var sec = Math.floor((ms/1000)%60);
+	return min + "m " + sec + "s";
+}
+
 // function to alert player that they won
 function youWin(){
 	shuffled = false;
+	var time = Date.now() - start;
+	wintime = msToMinSec(time);
+	console.log("Solve: " + wintime);
+	console.log("Moves: " + nummoves);
 
+	if(time < besttime)
+		besttime = time
+
+	if(nummoves < leastmoves)
+		leastmoves = nummoves
+
+	// DISPLAY WIN PAGE
+	
 	// main overlay container
 	var overlay = $('<div id="overlay">').css({
 	    "width" : "100%",
 	    "height" : "100%",
-	    "background-color" : "rgba(255, 255, 0, 0.6)",
+	    "background-color" : "rgba(0, 0, 0, 0.6)",
 	    "position" : "fixed",
 	    "top" : "0",
 		"left" : "0",
@@ -148,53 +183,25 @@ function youWin(){
 
 	var cont = $('<div>').appendTo(overlay);
 
-	var winner = $('<h1 id="winner">').html("CONGRATULATIONS!! YOU WON!!!").css({
+	var winner = $('<h1 id="winner">').css({
 		"margin-top" : "60px",
 		"margin-bottom" : "-40px",
-		"font-size" : "64px",
+		"font-size" : "48px",
 		"font-style" : "italic",
 		"text-shadow" : "1px 0 black",
-		"color" : "#ff0000"
-	});
+		"color" : "#ffffff"
+	}).html("NICE!!<br><br>You won in " +
+			 wintime + " and " + 
+			 nummoves + " moves<br><br>Best time: " + 
+			 msToMinSec(besttime) + "<br>Least moves: " +
+			 leastmoves);
 	$(winner).appendTo(cont);
 
 	// overlay message
-	$('<img src="http://img09.deviantart.net/5707/i/2011/294/5/3/it__s_time_to_duel_by_dbkaifan2009-d4dk24u.png">').css({
+	$('<img src="https://upload.wikimedia.org/wikipedia/en/0/09/AshXYanime.png">').css({
 		"zIndex" : "100",
 		"margin" : "100px"
-	}).css({
-		"width" : "50%"
 	}).insertAfter(winner);
 
-	$(cont).hide();
-	$(cont).slideToggle(1500);
-
-	setTimeout(toggleBG, 50);
-	setTimeout(toggleFont, 800);
-}
-
-// function to change the win background color
-function toggleBG(){
-	if(bg==0){
-		$("#overlay").css({ "background-color" : "rgba(255, 0, 0, 0.6)" });
-		bg = 1;
-	} else {
-		$("#overlay").css({ "background-color" : "rgba(255, 255, 0, 0.6)" });
-		bg = 0;
-	}
-
-	setTimeout(toggleBG, 50);
-}
-
-// function to change the win text color
-function toggleFont(){
-	if(font==0){
-		$("#winner").css({ "color" : "#ffff00" });
-		font = 1;
-	} else {
-		$("#winner").css({ "color" : "#ff0000" });
-		font = 0;
-	}
-
-	setTimeout(toggleFont, 800);
+	// END DISPLAY WIN ANIMATION
 }
