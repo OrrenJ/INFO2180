@@ -6,6 +6,7 @@ Extra features implpemented:
 - End-of-game notification (grade this, see youWin())
 - Animations and/or transitions
 - Game time
+- Multiple backgrounds
 
 */
 
