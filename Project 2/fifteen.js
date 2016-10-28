@@ -11,17 +11,34 @@ Extra features implpemented:
 
 // GLOBAL VARIABLES
 
-var puzzlesize = 400;	// size of the board (400px)
-var numpieces = 4;		// grid size (4x4)
-var piecesize;			// size of a single piece
-var emptysquare;		// position of the empty square
-var pieces;				// variable to store array of pieces
-var movetime = 250;		// time to move one piece
-var shuffled = false;	// boolean to track if board is solved or not
-var start;
-var nummoves = 0;
-var besttime = 999999;
-var leastmoves = 999999;
+var puzzlesize = 400;			// size of the board (400px)
+var numpieces = 4;				// grid size (4x4)
+var piecesize;					// size of a single piece
+var emptysquare;				// position of the empty square
+var pieces;						// variable to store array of pieces
+var movetime = 250;				// time to move one piece
+var shuffled = false;			// boolean to track if board is solved or not
+var start;						// holder for timestamp of shuffle clicked
+var nummoves = 0;				// number of moves made
+var besttime = 999999;			// arbitrary default
+var leastmoves = 999999;		// arbitrary default
+
+// background images
+var bg_urls = [ "background.jpg",
+				"http://i.imgur.com/BEYGB2N.jpg",
+				"http://i.imgur.com/3kGIRSu.jpg",
+				"http://i.imgur.com/mqYvtPa.jpg",
+				"http://i.imgur.com/NEyZmBA.jpg",
+				"http://i.imgur.com/VsFgBt8.jpg" ];
+// names for backgrounds
+var bg_names = [ "Gengar",
+				 "Pikachu",
+				 "Eevee",
+				 "Gyarados",
+				 "Onix",
+				 "Horsea" ];
+
+var background = bg_urls[0];	// holder for background image
 
 // "main" function
 $(document).ready(function(){
@@ -43,6 +60,19 @@ $(document).ready(function(){
 		nummoves = 0;
 		var shuffletime = Date.now() - start;
 		console.log("Shuffle: " + shuffletime + "ms");	// log time spent shuffling
+	});
+
+	// add selector for different backgrounds
+	var select_bg = $("<select id='select_bg'>").css({"margin":"8px"});
+	for(i=0; i<bg_urls.length; i++){
+		$("<option>").val(bg_urls[i]).html(bg_names[i]).appendTo(select_bg);
+	}
+	$("#shufflebutton").before(select_bg);
+
+	// method invoked when option selected
+	$(select_bg).change(function(){
+		background = $(this).val();
+		$(pieces).css({ "background-image" : "url(" + background + ")" });
 	});
 
 });
@@ -198,7 +228,7 @@ function youWin(){
 	$(winner).appendTo(cont);
 
 	// overlay message
-	$('<img src="https://upload.wikimedia.org/wikipedia/en/0/09/AshXYanime.png">').css({
+	$('<img src="' + background + '">').css({
 		"zIndex" : "100",
 		"margin" : "100px"
 	}).insertAfter(winner);
